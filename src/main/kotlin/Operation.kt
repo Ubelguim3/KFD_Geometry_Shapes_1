@@ -1,0 +1,3 @@
+enum class Operation {
+    INSERT, GET_PERIMETER, GET_AREA, EXIT, EXCEPTION
+}
