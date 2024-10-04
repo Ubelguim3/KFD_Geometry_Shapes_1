@@ -76,7 +76,7 @@ object FigureServiceImpl : FigureService {
 
         private fun getPerimeter() {
             println("Периметр каждой фигуры: \n ${FigureServiceImpl.getPerimeter()}")
-            print(figureNames)
+            println(figureNames)
         }
 
         private fun getOperations(commandOperation: String): Operation {
