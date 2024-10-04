@@ -1,5 +1,5 @@
 object FigureServiceImpl : FigureService {
-
+    private var figureNames = mutableListOf<String>()
     private val circleList = mutableListOf<Circle>()
     private val squareList = mutableListOf<Square>()
 
@@ -8,6 +8,7 @@ object FigureServiceImpl : FigureService {
             throw BadPropertyException("Введено неверное значение параметра property: $property ")
         }
         squareList.add(Square(property))
+        println("Вы ввели Square, с длиной стороны: $property")
     }
 
     override fun addCircle(property: Double) {
@@ -15,6 +16,7 @@ object FigureServiceImpl : FigureService {
             throw BadPropertyException("Введено неверное значение параметра property: $property ")
         }
         circleList.add(Circle(property))
+        println("Вы ввели Circle, с длиной радиуса: $property")
     }
 
     override fun getPerimeter(): List<Double> {
@@ -50,21 +52,31 @@ object FigureServiceImpl : FigureService {
                 else -> throw WrongFigureTypeException("Можно ввести только фигуры типа Square или Circle\n")
             }
             val property = readln().toDouble()
+//            if (property <= 0 || property.isNaN()) {
+//                throw BadPropertyException("Введённое значение должно быть больше 0\n")
+//            }
             when (operation) {
-                "1" -> FigureServiceImpl.addSquare(property)
-                "2" -> FigureServiceImpl.addCircle(property)
-
+                "Square" -> {
+                    addSquare(property)
+                    figureNames.add("Square")
+                }
+                "Circle" -> {
+                    addCircle(property)
+                    figureNames.add("Circle")
+                }
             }
 
 
         }
 
         private fun getArea() {
-            println("Площадь каждой фигуры: ${FigureServiceImpl.getArea()} \n")
+            println("Площадь каждой фигуры: \n ${FigureServiceImpl.getArea()}")
+            println(figureNames)
         }
 
         private fun getPerimeter() {
-            println("Периметр каждой фигуры: ${FigureServiceImpl.getPerimeter()} \n")
+            println("Периметр каждой фигуры: \n ${FigureServiceImpl.getPerimeter()}")
+            print(figureNames)
         }
 
         private fun getOperations(commandOperation: String): Operation {
